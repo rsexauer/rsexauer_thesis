@@ -121,6 +121,11 @@ view: master {
     sql: ${TABLE}.nameLast ;;
   }
 
+  dimension:  full_name{
+    type: string
+    sql: CONCAT(${name_first}, ' ', ${name_last}) ;;
+  }
+
   dimension: player_id {
     type: string
     sql: ${TABLE}.playerID ;;

@@ -73,7 +73,18 @@ explore: fielding_post {
 
 explore: home_games {}
 
-explore: master {}
+explore: master{
+  join: salaries {
+    type: left_outer
+    sql_on: ${master.player_id} = ${salaries.player_id} ;;
+    relationship: one_to_many
+  }
+  join: batting {
+    type: left_outer
+    sql_on: ${master.player_id} = ${batting.player_id};;
+    relationship: one_to_many
+  }
+}
 
 explore: parks {}
 

@@ -21,10 +21,10 @@ view: plays {
     sql: ${TABLE}.batter ;;
   }
 
-  dimension: count {
-    type: string
-    sql: ${TABLE}.count ;;
-  }
+#   dimension: count {
+#     type: string
+#     sql: ${TABLE}.count ;;
+#   }
 
   dimension: description {
     type: string

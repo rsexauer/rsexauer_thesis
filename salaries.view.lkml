@@ -31,4 +31,22 @@ view: salaries {
     type: count
     drill_fields: [teams.team_idretro, teams.name]
   }
+
+  measure: average_salary {
+    type: average
+    sql: ${salary} ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: total_salary {
+    type: sum
+    sql: ${salary};;
+    value_format: "$#,##0.00"
+  }
+
+  measure: max_salary {
+    type: max
+    sql: ${salary} ;;
+    value_format: "$#,##0.00"
+  }
 }

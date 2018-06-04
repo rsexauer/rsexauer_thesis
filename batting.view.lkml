@@ -116,4 +116,10 @@ view: batting {
     type: count
     drill_fields: [teams.team_idretro, teams.name]
   }
+
+  measure: total_hr{
+    type: sum
+    sql: ${hr} ;;
+    drill_fields: [teams.team_idretro, teams.name]
+  }
 }
