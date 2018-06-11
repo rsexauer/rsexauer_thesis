@@ -129,6 +129,7 @@ view: master {
   dimension: player_id {
     type: string
     sql: ${TABLE}.playerID ;;
+    primary_key: yes
   }
 
   dimension: retro_id {

@@ -156,4 +156,125 @@ view: pitching {
     type: count
     drill_fields: [teams.team_idretro, teams.name]
   }
+
+  parameter: measure_type {
+    suggestions: ["sum","average","count","min","max"]
+  }
+
+  parameter: dimension_to_aggregate {
+    type: unquoted
+    allowed_value: {
+      label: "Batting Average Against"
+      value: "baopp"
+    }
+    allowed_value: {
+      label: "Walks"
+      value: "bb"
+    }
+    allowed_value: {
+      label: "Batters Faced"
+      value: "bfp"
+    }
+    allowed_value: {
+      label: "Balk"
+      value: "bk"
+    }
+    allowed_value: {
+      label: "Complete Games"
+      value: "cg"
+    }
+    allowed_value: {
+      label: "Earned Runs"
+      value: "er"
+    }
+    allowed_value: {
+      label: "Earned Run Average"
+      value: "era"
+    }
+    allowed_value: {
+      label: "Games"
+      value: "g"
+    }
+    allowed_value: {
+      label: "Games Finished"
+      value: "gf"
+    }
+    allowed_value: {
+      label: "Ground Into Double Play"
+      value: "gipd"
+    }
+    allowed_value: {
+      label: "Games Started"
+      value: "gs"
+    }
+    allowed_value: {
+      label: "Hits"
+      value: "h"
+    }
+    allowed_value: {
+      label: "Hit by Pitch"
+      value: "hbp"
+    }
+    allowed_value: {
+      label: "Home Runs"
+      value: "hr"
+    }
+    allowed_value: {
+      label: "Intentional Walks"
+      value: "ibb"
+    }
+    allowed_value: {
+      label: "Innings Pitched Outs"
+      value: "ipouts"
+    }
+    allowed_value: {
+      label: "Losses"
+      value: "l"
+    }
+    allowed_value: {
+      label: "Runs"
+      value: "r"
+    }
+    allowed_value: {
+      label: "Sacrifice Flies"
+      value: "sf"
+    }
+    allowed_value: {
+      label: "Sacrifice Hits"
+      value: "sh"
+    }
+    allowed_value: {
+      label: "Shutouts"
+      value: "sho"
+    }
+    allowed_value: {
+      label: "Strikeouts"
+      value: "so"
+    }
+    allowed_value: {
+      label: "Saves"
+      value: "sv"
+    }
+    allowed_value: {
+      label: "Wins"
+      value: "w"
+    }
+    allowed_value: {
+      label: "Wild Pitches"
+      value: "wp"
+    }
+
+  }
+
+  measure: dynamic_agg {
+    type: number
+    label_from_parameter: dimension_to_aggregate
+    sql: case when  {% condition measure_type %} 'sum' {% endcondition %}  then sum( ${TABLE}.{% parameter dimension_to_aggregate %})
+          when {% condition measure_type %} 'average' {% endcondition %}  then avg( ${TABLE}.{% parameter dimension_to_aggregate %})
+          when {% condition measure_type %} 'count' {% endcondition %}  then count( ${TABLE}.{% parameter dimension_to_aggregate %})
+          when {% condition measure_type %} 'min' {% endcondition %}  then min( ${TABLE}.{% parameter dimension_to_aggregate %})
+          when {% condition measure_type %} 'max' {% endcondition %}  then max( ${TABLE}.{% parameter dimension_to_aggregate %})
+          else null end;;
+  }
+
 }

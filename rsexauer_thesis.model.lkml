@@ -84,6 +84,16 @@ explore: master{
     sql_on: ${master.player_id} = ${batting.player_id};;
     relationship: one_to_many
   }
+  join: pitching {
+    type: left_outer
+    sql_on: ${master.player_id} = ${pitching.player_id} ;;
+    relationship: one_to_many
+  }
+  join: fielding {
+    type: left_outer
+    sql_on: ${master.player_id} = ${fielding.player_id} ;;
+    relationship: one_to_many
+  }
 }
 
 explore: parks {}
