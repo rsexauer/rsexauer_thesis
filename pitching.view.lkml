@@ -31,7 +31,7 @@ view: pitching {
     sql: ${TABLE}.ER ;;
   }
 
-  dimension: era {
+  dimension: era_per_team {
     type: number
     sql: ${TABLE}.ERA ;;
   }
@@ -152,10 +152,43 @@ view: pitching {
     sql: ${TABLE}.yearID ;;
   }
 
+# Qualified minimum = 162 iP
+  dimension: innings_pitched_per_team{
+    type: number
+    sql: ${ipouts}/3 ;;
+    value_format: "#.0;"
+  }
+
   measure: count {
     type: count
     drill_fields: [teams.team_idretro, teams.name]
   }
+
+  measure: Team_list {
+    type: list
+    list_field: team_id
+  }
+
+  measure: Earned_Runs {
+    type: sum
+    sql: ${er} ;;
+  }
+
+  measure: innings_pitched{
+    type: sum
+    sql: ${ipouts}/3 ;;
+    value_format: "#.0;"
+ }
+
+  measure: Earned_Run_Average {
+    type: number
+    sql: ${Earned_Runs}/${innings_pitched}*9 ;;
+    value_format:"#.00"
+ }
+
+# ###################
+# ###################
+# Dimensional Aggs
 
   parameter: measure_type {
     suggestions: ["sum","average","count","min","max"]

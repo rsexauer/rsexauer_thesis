@@ -112,7 +112,7 @@ view: batting {
     sql: ${TABLE}.yearID ;;
   }
 
-  dimension: team_batting_average{
+  dimension: batting_average_by_team {
     type: number
       sql:CASE WHEN ab >= 1 THEN ${h}/${ab} ELSE NULL END ;;
      value_format:".#00"
@@ -150,6 +150,8 @@ view: batting {
     list_field: team_id
   }
 
+# ####################
+# ####################
 # Dimensional Aggs
   parameter: measure_type {
     suggestions: ["sum","average","count","min","max"]
