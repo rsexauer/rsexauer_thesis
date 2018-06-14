@@ -112,7 +112,7 @@ view: batting {
     sql: ${TABLE}.yearID ;;
   }
 
-  dimension: batting_average_by_team {
+  dimension: batting_average_per_team {
     type: number
       sql:CASE WHEN ab >= 1 THEN ${h}/${ab} ELSE NULL END ;;
      value_format:".#00"
@@ -141,7 +141,7 @@ view: batting {
 
   measure: batting_average {
     type: number
-    sql: ${total_hits}/${total_at_bats} ;;
+    sql: CASE WHEN ${total_at_bats} >= 1 THEN ${total_hits}/${total_at_bats} ELSE NULL END;;
     value_format:".#00"
   }
 

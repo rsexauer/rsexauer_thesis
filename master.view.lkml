@@ -21,12 +21,26 @@ view: master {
     sql: ${TABLE}.birthCountry ;;
   }
 
+  dimension:  birth_place {
+    type: string
+    sql: CONCAT(${birth_city}, ', ', ${birth_state}, ', ', ${birth_country}) ;;
+  }
+
+# Birth Date
+  dimension_group:  birth {
+    timeframes: [date, year, month, day_of_month]
+    type: time
+    datatype: date
+    sql: DATE(${year}, ${month}, ${birth_day}) ;;
+  }
+
   dimension: birth_day {
     type: number
     sql: ${TABLE}.birthDay ;;
   }
 
-  dimension: birth_month {
+# Birth Month
+  dimension: month {
     type: number
     sql: ${TABLE}.birthMonth ;;
   }
@@ -36,7 +50,8 @@ view: master {
     sql: ${TABLE}.birthState ;;
   }
 
-  dimension: birth_year {
+# Year
+  dimension: year {
     type: number
     sql: ${TABLE}.birthYear ;;
   }
@@ -101,9 +116,14 @@ view: master {
     sql: ${TABLE}.finalGame ;;
   }
 
-  dimension: height {
+  dimension: height_inches {
     type: number
     sql: ${TABLE}.height ;;
+  }
+
+  dimension: height {
+    type: string
+    sql: CONCAT((${height_inches}/12), '-', MOD(${height_inches}, 12)) ;;
   }
 
   dimension: name_first {
@@ -121,7 +141,7 @@ view: master {
     sql: ${TABLE}.nameLast ;;
   }
 
-  dimension:  full_name{
+  dimension:  full_name {
     type: string
     sql: CONCAT(${name_first}, ' ', ${name_last}) ;;
   }

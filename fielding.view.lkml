@@ -97,6 +97,16 @@ view: fielding {
     drill_fields: [teams.team_idretro, teams.name]
   }
 
+  measure: Position_list {
+    type: list
+    list_field: pos
+  }
+
+  measure: Team_list {
+    type: list
+    list_field: team_id
+  }
+
   parameter: measure_type {
     suggestions: ["sum","average","count","min","max"]
   }

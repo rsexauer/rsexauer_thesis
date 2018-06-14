@@ -186,11 +186,11 @@ view: pitching {
     value_format:"#.00"
  }
 
-  measure: Team_Earned_Run_Average {
-    type: number
-    sql: ${Earned_Runs}/${innings_pitched}*9 ;;
-    value_format:"#.00"
-  }
+#   measure: Team_Earned_Run_Average {
+#     type: number
+#     sql: ${Earned_Runs}/${innings_pitched}*9 ;;
+#     value_format:"#.00"
+#   }
 
 # ###################
 # ###################
